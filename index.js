@@ -1,4 +1,4 @@
 const server = require('./src/app');
 
-server.listen(3333);
+server.listen(3333)
 

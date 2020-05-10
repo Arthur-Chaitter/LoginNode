@@ -3,10 +3,4 @@ const configuration = require('../../knexfile');
 
 const connection = knex(configuration.development);
 
-module.exports = {
-    async create(data){
-        connection.insert
-    }
-
-
-}
+module.exports = connection;
