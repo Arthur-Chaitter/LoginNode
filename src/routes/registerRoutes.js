@@ -1,14 +1,13 @@
 const { Router } = require('express');
 
 const RegisterController = require('../controllers/RegisterController');
-
-const connection = require('../database/connection');
+const RegisterValidations = require('../validations/RegisterValidations');
 
 const registerRoutes = new Router();
 
 registerRoutes.get('/all', RegisterController.index);
 
-registerRoutes.post('/register', RegisterController.register);
+registerRoutes.post('/register', RegisterValidations.index , RegisterController.register);
 
 
 module.exports = registerRoutes;
