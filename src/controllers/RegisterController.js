@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const connection = require('../database/connection');
 
 const userToken = require('../config/userToken');
+const adminToken = require('../config/adminToken');
 
 class RegisterController{
     async index(req,res){
@@ -28,6 +29,21 @@ class RegisterController{
                 mensage: 'Usuario criado com sucesso!',
             })
 
+        }
+        if(type == "admin"){
+            await connection('admin').insert({
+                type,
+                username,
+                email,
+                password,
+            });
+
+            return res.status(200).json({
+                token: jwt.sign({ type }, adminToken.secret, {
+                 expiresIn: adminToken.expiresIn
+                }),
+                mensage: 'Admin criado com sucesso!',
+            })
         }else{
             res.status(401).json({error: 'Tipo de não encontrado! Controller'});
         }
