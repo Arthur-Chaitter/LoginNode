@@ -23,10 +23,7 @@ class RegisterController{
             });
 
             return res.status(200).json({
-                token: jwt.sign({ type }, userToken.secret, {
-                 expiresIn: userToken.expiresIn,
-                }),
-                mensage: 'Usuario criado com sucesso!',
+                mensage: 'Usuario criado com sucesso!'
             })
 
         }
@@ -39,10 +36,7 @@ class RegisterController{
             });
 
             return res.status(200).json({
-                token: jwt.sign({ type }, adminToken.secret, {
-                 expiresIn: adminToken.expiresIn
-                }),
-                mensage: 'Admin criado com sucesso!',
+                mensage: 'Admin criado com sucesso!'
             })
         }else{
             res.status(401).json({error: 'Tipo de não encontrado! Controller'});
