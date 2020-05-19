@@ -1,8 +1,5 @@
-const jwt = require('jsonwebtoken');
 const connection = require('../database/connection');
 
-const userToken = require('../config/userToken');
-const adminToken = require('../config/adminToken');
 
 class RegisterController{
     async index(req,res){
