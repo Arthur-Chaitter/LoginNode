@@ -1,4 +1,5 @@
 const connection = require('../database/connection');
+const bcrypt = require('bcrypt');
 
 
 class RegisterController{
@@ -9,34 +10,44 @@ class RegisterController{
     }
     
     async register(req,res){
-        const { type, username, email, password } = req.body;
+        const { type, username, email } = req.body;
 
-        if(type == "user"){
-            await connection('users').insert({
-                type,
-                username,
-                email,
-                password,
-            });
+        try{
+            if(type == "user"){
+                const password = await bcrypt.hash(req.body.password,10);
 
-            return res.status(200).json({
-                mensage: 'Usuario criado com sucesso!'
-            })
+                console.log(password);
+                await connection('users').insert({
+                    type,
+                    username,
+                    email,
+                    password,
+                });
 
-        }
-        if(type == "admin"){
-            await connection('admin').insert({
-                type,
-                username,
-                email,
-                password,
-            });
+                return res.status(200).json({
+                    mensage: 'Usuario criado com sucesso!'
+                })
+            }
 
-            return res.status(200).json({
-                mensage: 'Admin criado com sucesso!'
-            })
-        }else{
-            res.status(401).json({error: 'Tipo de não encontrado! Controller'});
+            if(type == "admin"){
+                const password = await bcrypt.hash(req.body.password,15);
+
+                console.log(password);
+
+                await connection('admin').insert({
+                    type,
+                    username,
+                    email,
+                    password,
+                });
+    
+                return res.status(200).json({
+                    mensage: 'Admin criado com sucesso!'
+                })
+            }
+
+        }catch{
+            res.status(500).json({error: 'Erro ao criar!'});
         }
 
     };
