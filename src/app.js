@@ -2,6 +2,7 @@ const express = require('express');
 
 const registerRoutes = require('./routes/registerRoutes');
 const loginRoutes = require('./routes/loginRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 class App{
     constructor(){
@@ -20,7 +21,7 @@ class App{
     }
 
     protectedRoutes(){
-
+        this.server.use(userRoutes);
     }
 }
 

@@ -16,7 +16,6 @@ class RegisterController{
             if(type == "user"){
                 const password = await bcrypt.hash(req.body.password,10);
 
-                console.log(password);
                 await connection('users').insert({
                     type,
                     username,
