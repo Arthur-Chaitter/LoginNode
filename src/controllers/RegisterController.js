@@ -24,7 +24,7 @@ class RegisterController{
                     password,
                 });
 
-                return res.status(200).json({
+                return res.status(201).json({
                     mensage: 'Usuario criado com sucesso!'
                 })
             }
@@ -41,7 +41,7 @@ class RegisterController{
                     password,
                 });
     
-                return res.status(200).json({
+                return res.status(201).json({
                     mensage: 'Admin criado com sucesso!'
                 })
             }
